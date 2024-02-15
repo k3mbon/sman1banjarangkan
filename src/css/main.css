@@ -1,0 +1,117 @@
+* {
+  font-family: 'Poppins', sant-serif;
+}
+
+:root {
+  --prymary-color: #f6f8fd;
+  --secondary-color: #dc3545;
+  --color-text: #ffffff;
+  --navbar-color-text: #000000;
+}
+
+/* Navbar Style */
+.navbar {
+  width: 100%;
+  position: fixed;
+  padding: 15px 0 15px 0;
+  z-index: 10;
+}
+.navbar .brand h2 {
+  font-size: 1.5rem;
+}
+
+.navbar.color-active {
+  background-color: #00aff0;
+  padding: 20px 0 20px 0;
+  border-bottom: 0.5px solid #000000;
+}
+
+.navbar img {
+  height: 30px;
+  margin-right: 10px;
+}
+
+.navbar .navbar-nav a {
+  padding: 5px 10px 5px 10px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 992px) {
+  .navbar .brand h2 {
+    font-size: 1rem;
+  }
+  .navbar img {
+    display: none;
+  }
+}
+
+.navbar .navbar-nav a:hover {
+  color: var(--secondary-color);
+}
+
+/* header style */
+
+header {
+  background: #00aff0;
+  background: linear-gradient(to right, #00aff0, #ffffff);
+  padding-top: 100px;
+
+  animation: backInUp; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 2s; /* don't forget to set a duration! */
+}
+
+.homepage {
+  padding-top: 100px;
+}
+.homepage .header-box h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-text);
+  background: linear-gradient(to right, gold 0%, #330867 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.homepage .header-box h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-text);
+  background: linear-gradient(to right, red 0%, #330867 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.homepage .header-box img {
+  width: 60%;
+}
+
+.kepsek img {
+  height: 350px;
+}
+
+.logo-footer img {
+  height: 45px;
+  margin-bottom: 10px;
+}
+
+.carousel-detail img {
+  max-height: 500px;
+}
+
+/* Carousel Awal */
+
+.selamat-datang,
+.artikel-terbaru {
+  animation: backInUp; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 2s; /* don't forget to set a duration! */
+}
+
+.google-map-code {
+  height: 100%;
+}
+
+.card .gambar img{
+  max-height: 170px;
+
+}
