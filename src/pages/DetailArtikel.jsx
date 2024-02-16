@@ -1,7 +1,32 @@
+import React, { useEffect, useState } from 'react';
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
 import ArtikelCard from '../components/smallcomponents/ArtikelCard';
+import { useParams } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 function DetailArtikel() {
+  const { postId } = useParams();
+  const [postDetails, setPostDetails] = useState(null);
+
+  useEffect(() => {
+    const fetchPostDetails = async () => {
+      try {
+        const postDoc = await getDoc(doc(db, 'posts', postId));
+        if (postDoc.exists()) {
+          setPostDetails(postDoc.data());
+        } else {
+          console.error('Post not found');
+        }
+      } catch (error) {
+        console.error('Error fetching post details: ', error);
+      }
+    };
+
+    fetchPostDetails();
+  }, [postId]);
+
+
   return (
     <>
       <Container className="mb-5 shadow rounded">
@@ -34,30 +59,15 @@ function DetailArtikel() {
         </Row>
         <Row className="mt-2">
           <Col>
-            <h2>Ini Judul Artikelnya</h2>
-            <p>
-              Om Swastyastu, <br /> Assalamualaikum Warahmatullahi Wabarakatuh,{' '}
-              <br />
-              Salam Sejahtera bagi kita semua, <br />
-              Salam Kebajikan Namo Budhaya Syalom,
-              <br />
-              Mengawali ikhtiar penyajian media yang akuntabel, saya sebagai
-              Kepala Sekolah mengucapkan selamat datang kepada pengunjung
-              terhormat di Website SMA Negeri 1 Banjarangkan. Informasi
-              akuntabel yang dibutuhkan oleh pihak berkepentingan terhadap SMA
-              Negeri 1 Banjarangkan, perlu kita sajikan untuk pemenuhan beragam
-              kebutuhan informasi tentang aktivitas Pendidikan dalam arti
-              seluas-luasnya bagi warga internal dan masyarakat umum. Informasi
-              yang disuguhkan adalah hal mengenai berbagai kegiatan tentang
-              sekolah yang sekiranya diperlukan oleh pihak-pihak terkait.
-              Sebaliknya segala yang ada dalam suguhan Website kita, diharapkan
-              dapat menjadi bahan baku masukan oleh pihak yang berkepentingan
-              untuk pemajuan kualitas pelaksanaan Pendidikan di SMAN 1
-              Banjarangkan. Semoga peluncuran website SMA Negeri 1 Banjarangkan
-              ini secara relatif dapat memenuhi harapan dimaksud. Semoga pula
-              website ini menjadi salah satu media online akuntabel bagi kita
-              semua.
-            </p>
+            {postDetails ? (
+        <>
+          <h2>{postDetails.Judul}</h2>
+          <p>{postDetails.Isi}</p>
+          <img src={postDetails.Gambar1} alt="Post Image" />
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
           </Col>
         </Row>
       </Container>

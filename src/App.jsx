@@ -26,7 +26,7 @@ function App() {
         <Route path="/identitas" Component={IdentitasPage} />
         <Route path="/extra" Component={ExtraPage} />
         <Route path="/semuaartikel" Component={ArtikelAll} />
-        <Route path="/detailartikel" Component={DetailArtikel} />
+        <Route path="/detailartikel/:postId" Component={DetailArtikel} />
       </Routes>
       <FooterComponent />
     </div>
