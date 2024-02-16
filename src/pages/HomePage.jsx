@@ -14,6 +14,8 @@ import { db } from "../firebase"
 const HomePage = () => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
+  const [agendas, setAgendas] = useState([]);
+  const [prestasis, setPrestasis] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -28,10 +30,40 @@ const HomePage = () => {
         console.error("Error fetching posts: ", error);
       }
     };
-  
     fetchPosts();
   }, []);
   
+  useEffect(() => {
+    const fetchAgendas = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'agenda'));
+        const agendaList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setAgendas(agendaList);
+      } catch (error) {
+        console.error("Error fetching posts: ", error);
+      }
+    };
+    fetchAgendas();
+  }, []);
+
+  useEffect(() => {
+    const fetchPrestasis = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'prestasi'));
+        const prestasiList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setPrestasis(prestasiList);
+      } catch (error) {
+        console.error("Error fetching prestasi: ", error);
+      }
+    };
+    fetchPrestasis();
+  }, []);
 
   const navigateToAllArtikel = () => {
     navigate('/semuaartikel');
@@ -151,21 +183,11 @@ const HomePage = () => {
             data-aos="fade-up"
             data-aos-duration="2000"
           >
-            <Col lg="3">
-              <Prestasi />
+            {prestasis.slice(0, maxCards).map((prestasi) => (
+            <Col lg="4">
+              <Prestasi key={prestasi.id} prestasi={prestasi} />
             </Col>
-            <Col lg="3">
-              <Prestasi />
-            </Col>
-            <Col lg="3">
-              <Prestasi />
-            </Col>
-            <Col lg="3">
-              <Prestasi />
-            </Col>
-            <Col lg="3">
-              <Prestasi />
-            </Col>
+            ))}
           </Row>
         </Container>
       </div>
@@ -182,49 +204,21 @@ const HomePage = () => {
             data-aos="fade-up"
             data-aos-duration="2000"
           >
-            <Card>
-              <Card.Header>Quote</Card.Header>
-              <Card.Body>
-                <blockquote className="blockquote mb-0">
-                  <p>
-                    {' '}
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Integer posuere erat a ante.{' '}
-                  </p>
-                  <footer className="blockquote-footer">
-                    Someone famous in{' '}
-                    <cite title="Source Title">Source Title</cite>
-                  </footer>
-                </blockquote>
-              </Card.Body>
-            </Card>
-            <Card>
-              <Card.Header>Quote</Card.Header>
-              <Card.Body>
-                <blockquote className="blockquote mb-0">
-                  <p>
-                    {' '}
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Integer posuere erat a ante.{' '}
-                  </p>
-                  <footer className="blockquote-footer">
-                    Someone famous in{' '}
-                    <cite title="Source Title">Source Title</cite>
-                  </footer>
-                </blockquote>
-              </Card.Body>
-            </Card>
-            <Card>
-              <Card.Header>Judul Agenda</Card.Header>
-              <Card.Body>
-                <blockquote className="blockquote mb-0">
-                  <p> Keterangan Agenda yang akan dilaksanakan </p>
-                  <footer className="blockquote-footer">
-                    waktu <cite title="Source Title">tempat</cite>
-                  </footer>
-                </blockquote>
-              </Card.Body>
-            </Card>
+             {agendas.slice(0, maxCards).map((agenda) => (
+               <Card>
+               <Card.Header>{agenda.judul}</Card.Header>
+               <Card.Body>
+                 <blockquote className="blockquote mb-0">
+                   <p>
+                     {agenda.isi}
+                   </p>
+                   <footer className="blockquote-footer">
+                     {agenda.tanggal}
+                   </footer>
+                 </blockquote>
+               </Card.Body>
+             </Card>
+               ))}
           </Row>
         </Container>
       </div>

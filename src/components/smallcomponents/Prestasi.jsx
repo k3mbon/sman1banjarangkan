@@ -1,17 +1,13 @@
 import { Card } from 'react-bootstrap';
 
-function Prestasi() {
+function Prestasi({prestasi}) {
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img
-        variant="top"
-        src="https://pixelprowess.com/i/carousel_flight.png"
-      />
+      <img variant="top" src={prestasi.imageUrl} alt="Post Image" />
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+        <Card.Title>{prestasi.title}</Card.Title>
         <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the cards content.
+        {prestasi.description}
         </Card.Text>
       </Card.Body>
     </Card>
