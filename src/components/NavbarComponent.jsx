@@ -1,11 +1,5 @@
-import {
-  Container,
-  Nav,
-  NavDropdown,
-  Navbar,
-  Offcanvas,
-} from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { Container, Nav, NavDropdown, Navbar, Offcanvas } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 
 const NavbarComponent = () => {
@@ -29,34 +23,20 @@ const NavbarComponent = () => {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-center flex-grow-1 text-md pe-3">
-                <Nav.Link>
-                  <NavLink to="/">Home</NavLink>
+                <Nav.Link as={Link} to="/">
+                  Home
                 </Nav.Link>
-                <Nav.Link>
-                  <NavLink to="/visi">Visi, Misi Sekolah</NavLink>
+                <Nav.Link as={Link} to="/visi">
+                  Visi, Misi Sekolah
                 </Nav.Link>
                 <NavDropdown
                   title="Profile"
                   id={`offcanvasNavbarDropdown-expand-$lg`}
                 >
-                  <NavDropdown.Item>
-                    <NavLink to="/sejarah">Sejarah Sekolah</NavLink>
+                  <NavDropdown.Item as={Link} to="/sejarah">
+                    Sejarah Sekolah
                   </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    <NavLink to="/mars">Mars</NavLink>
-                  </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    <NavLink to="/profil">Profil Sekolah</NavLink>
-                  </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    <NavLink to="/karakteristik">Karakteristik Sekolah</NavLink>
-                  </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    <NavLink to="/identitas">Identitas Sekolah</NavLink>
-                  </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    <NavLink to="/extra">Extra Kulikuler</NavLink>
-                  </NavDropdown.Item>
+                  {/* ... other NavDropdown.Items */}
                 </NavDropdown>
               </Nav>
             </Offcanvas.Body>

@@ -156,9 +156,9 @@ const HomePage = () => {
             data-aos="fade-up"
           >
             {posts.slice(0, maxCards).map((post) => (
-            <Col lg="4">
-              <ArtikelCard key={post.id} post={post} />
-            </Col>
+              <Col lg="4" key={post.id}>
+                <ArtikelCard post={post} />
+              </Col>
             ))}
           </Row>
           <Row className="mt-5">
@@ -184,9 +184,9 @@ const HomePage = () => {
             data-aos-duration="2000"
           >
             {prestasis.slice(0, maxCards).map((prestasi) => (
-            <Col lg="4">
-              <Prestasi key={prestasi.id} prestasi={prestasi} />
-            </Col>
+              <Col lg="4" key={prestasi.id}>
+                <Prestasi prestasi={prestasi} />
+              </Col>
             ))}
           </Row>
         </Container>
@@ -204,8 +204,8 @@ const HomePage = () => {
             data-aos="fade-up"
             data-aos-duration="2000"
           >
-             {agendas.slice(0, maxCards).map((agenda) => (
-                <Card key={agenda.id}>
+             {agendas.slice(0, maxCards).map((agenda, index) => (
+                <Card key={index}>
                   <Card.Header>{agenda.judul}</Card.Header>
                   <Card.Body>
                     <blockquote className="blockquote mb-0">
@@ -232,14 +232,14 @@ const HomePage = () => {
             </Col>
             <Col lg="6">
               <div className="google-map-code">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d126258.31161341842!2d115.28308807639708!3d-8.540841297425288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x2dd216b834441fab%3A0x515f438db632e16b!2sF958%2BM55%2C%20Tusan%2C%20Banjarangkan%2C%20Klungkung%20Regency%2C%20Bali%2080752!3m2!1d-8.540849999999999!2d115.36549!5e0!3m2!1sen!2sid!4v1707832285738!5m2!1sen!2sid"
-                  width="100%"
-                  height="300"
-                  style={{ border: 0 }}
-                  allowfullscreen=""
-                  aria-hidden="false"
-                />
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d126258.31161341842!2d115.28308807639708!3d-8.540841297425288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x2dd216b834441fab%3A0x515f438db632e16b!2sF958%2BM55%2C%20Tusan%2C%20Banjarangkan%2C%20Klungkung%20Regency%2C%20Bali%2080752!3m2!1d-8.540849999999999!2d115.36549!5e0!3m2!1sen!2sid!4v1707832285738!5m2!1sen!2sid"
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                aria-hidden="false"
+              />
               </div>
             </Col>
           </Row>
