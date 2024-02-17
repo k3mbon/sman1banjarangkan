@@ -205,20 +205,18 @@ const HomePage = () => {
             data-aos-duration="2000"
           >
              {agendas.slice(0, maxCards).map((agenda) => (
-               <Card>
-               <Card.Header>{agenda.judul}</Card.Header>
-               <Card.Body>
-                 <blockquote className="blockquote mb-0">
-                   <p>
-                     {agenda.isi}
-                   </p>
-                   <footer className="blockquote-footer">
-                     {agenda.tanggal}
-                   </footer>
-                 </blockquote>
-               </Card.Body>
-             </Card>
-               ))}
+                <Card key={agenda.id}>
+                  <Card.Header>{agenda.judul}</Card.Header>
+                  <Card.Body>
+                    <blockquote className="blockquote mb-0">
+                      <p>{agenda.isi}</p>
+                      <footer className="blockquote-footer">
+                        {agenda.tanggal ? agenda.tanggal.toDate().toLocaleDateString() : 'No date'}
+                      </footer>
+                    </blockquote>
+                  </Card.Body>
+                </Card>
+              ))}
           </Row>
         </Container>
       </div>
