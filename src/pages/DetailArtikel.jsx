@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Carousel, Col, Container, Row } from 'react-bootstrap';
 import ArtikelCard from '../components/smallcomponents/ArtikelCard';
 import { useParams } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 
 function DetailArtikel() {
   const { postId } = useParams();
   const [postDetails, setPostDetails] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const maxCards = 6;
 
   useEffect(() => {
     const fetchPostDetails = async () => {
@@ -26,11 +28,27 @@ function DetailArtikel() {
     fetchPostDetails();
   }, [postId]);
 
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'posts'));
+        const postsList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setPosts(postsList);
+      } catch (error) {
+        console.error("Error fetching posts: ", error);
+      }
+    };
+    fetchPosts();
+  }, []);
+
 
   return (
     <>
       <Container className="mb-5 shadow rounded">
-        <Row>
+        {/*<Row>
           <Col className="carousel-detail">
             <Carousel fade>
               <Carousel.Item interval={2000}>
@@ -56,7 +74,7 @@ function DetailArtikel() {
               </Carousel.Item>
             </Carousel>
           </Col>
-        </Row>
+        </Row>*/}
         <Row className="mt-2">
           <Col>
             {postDetails ? (
@@ -79,7 +97,11 @@ function DetailArtikel() {
         </Row>
         <Row className="mt-1 py-2">
           <Col lg="3">
-            <ArtikelCard />
+          {posts.slice(0, maxCards).map((post) => (
+              <Col lg="4" key={post.id}>
+                <ArtikelCard post={post} />
+              </Col>
+            ))}
           </Col>
         </Row>
       </Container>
