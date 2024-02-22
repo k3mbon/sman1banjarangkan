@@ -1,11 +1,17 @@
-import { Container, Nav, NavDropdown, Navbar, Offcanvas } from 'react-bootstrap';
+import {
+  Container,
+  Nav,
+  NavDropdown,
+  Navbar,
+  Offcanvas,
+} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 
 const NavbarComponent = () => {
   return (
     <>
-      <Navbar expand="lg" className="mb-3 bg-white">
+      <Navbar expand="lg" className="mb-3 mt-0 bg-white">
         <Container>
           <img className="" src={Logo} alt="img-logo" />
           <Navbar.Brand className="brand">

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Carousel, Col, Container, Row } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import ArtikelCard from '../components/smallcomponents/ArtikelCard';
 import { useParams } from 'react-router-dom';
 import { doc, getDoc, getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase';
+import Logo from '../assets/logo.png';
 
 function DetailArtikel() {
   const { postId } = useParams();
@@ -38,16 +39,36 @@ function DetailArtikel() {
         }));
         setPosts(postsList);
       } catch (error) {
-        console.error("Error fetching posts: ", error);
+        console.error('Error fetching posts: ', error);
       }
     };
     fetchPosts();
   }, []);
 
-
   return (
     <>
-      <Container className="mb-5 shadow rounded">
+      <div className="homepage mt-2">
+        <header className="headerpage">
+          <Container>
+            <Row className="header-box d-flex align-items-center">
+              <Col lg="9" className="">
+                <h1 className="">Artikel</h1>
+                {postDetails ? (
+                  <>
+                    <h2>{postDetails.Judul}</h2>
+                  </>
+                ) : (
+                  <p>Loading...</p>
+                )}
+              </Col>
+              <Col lg="3" className=" d-flex justify-content-center mb-2 p-2">
+                <img src={Logo} alt="logo-img" />
+              </Col>
+            </Row>
+          </Container>
+        </header>
+      </div>
+      <Container className="mt-5 shadow rounded detail-artikel">
         {/*<Row>
           <Col className="carousel-detail">
             <Carousel fade>
@@ -75,34 +96,36 @@ function DetailArtikel() {
             </Carousel>
           </Col>
         </Row>*/}
-        <Row className="mt-2">
+        <Row className="mt-2 py-5">
           <Col>
             {postDetails ? (
-        <>
-          <h2>{postDetails.Judul}</h2>
-          <p>{postDetails.Isi}</p>
-          <img src={postDetails.Gambar1} alt="Post Image" />
-        </>
-      ) : (
-        <p>Loading...</p>
-      )}
+              <>
+                <h2>{postDetails.Judul}</h2>
+                <img
+                  className="mx-auto d-flex"
+                  src={postDetails.Gambar1}
+                  alt="Post Image"
+                />
+                <p className="mt-5">{postDetails.Isi}</p>
+              </>
+            ) : (
+              <p>Loading...</p>
+            )}
           </Col>
         </Row>
       </Container>
-      <Container className="mb-5 shadow rounded">
+      <Container className="my-5 shadow rounded">
         <Row>
-          <Col>
+          <Col className="p-2">
             <h3>Artikel Lainnya</h3>
           </Col>
         </Row>
-        <Row className="mt-1 py-2">
-          <Col lg="3">
+        <Row className="mt-1 py-2 d-flex">
           {posts.slice(0, maxCards).map((post) => (
-              <Col lg="4" key={post.id}>
-                <ArtikelCard post={post} />
-              </Col>
-            ))}
-          </Col>
+            <Col lg="4" key={post.id}>
+              <ArtikelCard post={post} />
+            </Col>
+          ))}
         </Row>
       </Container>
     </>

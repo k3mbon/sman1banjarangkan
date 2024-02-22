@@ -9,7 +9,7 @@ function ArtikelCard({ post }) {
     if (post && post.id) {
       navigate(`/detailartikel/${post.id}`);
     } else {
-      console.error("Invalid post object:", post);
+      console.error('Invalid post object:', post);
     }
   };
 
@@ -24,9 +24,17 @@ function ArtikelCard({ post }) {
   return (
     <Card>
       {/* Use 'Link' directly around the Card component */}
-      <Link to={`/detailartikel/${post?.id}`} className="card-link">
-        <Card.Body className='gambar'>
-          <img variant="top" src={post?.Gambar1} alt="Post Image" />
+      <Link
+        to={`/detailartikel/${post?.id}`}
+        className="card-link text-decoration-none"
+      >
+        <Card.Body className="gambar">
+          <img
+            variant="top"
+            src={post?.Gambar1}
+            alt="Post Image"
+            className="w-100"
+          />
           <Card.Title>{truncatedJudul}</Card.Title>
           <Card.Text>{truncatedIsi}</Card.Text>
           <Button onClick={navigateToDetail} variant="primary">
