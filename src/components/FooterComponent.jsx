@@ -102,7 +102,7 @@ const divComponent = () => {
         </Container>
         <Container>
           <Row>
-            <Col className="text-center mt-2">© 2023 Copyright</Col>
+            <Col className="text-center mt-2">© 2024 Copyright</Col>
           </Row>
         </Container>
       </Container>
