@@ -55,7 +55,7 @@ function DetailArtikel() {
                 <h1 className="">Artikel</h1>
                 {postDetails ? (
                   <>
-                    <h2>{postDetails.Judul}</h2>
+                    <h2>{postDetails.judul}</h2>
                   </>
                 ) : (
                   <p>Loading...</p>
@@ -100,13 +100,20 @@ function DetailArtikel() {
           <Col>
             {postDetails ? (
               <>
-                <h2>{postDetails.Judul}</h2>
-                <img
-                  className="mx-auto d-flex"
-                  src={postDetails.Gambar1}
-                  alt="Post Image"
-                />
-                <p className="mt-5">{postDetails.Isi}</p>
+                <h2>{postDetails.judul}</h2>
+                {postDetails.Gambar1 && (
+                  <img
+                    className="mx-auto d-block"
+                    src={postDetails.Gambar1}
+                    alt="Post Image"
+                  />
+                )}
+                {postDetails.isi && (
+                  <div
+                    className="mt-5"
+                    dangerouslySetInnerHTML={{ __html: postDetails.isi }}
+                  />
+                )}
               </>
             ) : (
               <p>Loading...</p>

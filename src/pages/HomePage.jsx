@@ -8,7 +8,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const HomePage = () => {
@@ -20,7 +20,8 @@ const HomePage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, 'posts'));
+        const q = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
+        const querySnapshot = await getDocs(q);
         const postsList = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
@@ -32,6 +33,9 @@ const HomePage = () => {
     };
     fetchPosts();
   }, []);
+  
+  
+
 
   useEffect(() => {
     const fetchAgendas = async () => {
